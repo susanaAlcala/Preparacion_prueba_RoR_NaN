@@ -1,0 +1,18 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @project.name %>
+</p>
+
+<td><%= form_with model: [@project, Employee.new], url: project_add_employee_path(@project) do |f|%>
+<%= f.select :id, @employees_array %>
+<%= f.submit 'Agregar empleado' %>
+<% end %>
+
+<%@project.employees.each do |employee| %>
+  <p><%= employee.name %><%= link_to "X", project_remove_employee_path(@project, employee), method: :delete %></p>
+<% end %>
+
+<%= link_to 'Edit', edit_project_path(@project) %> |
+<%= link_to 'Back', projects_path %>
